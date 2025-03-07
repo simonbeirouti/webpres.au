@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { useEffect, useState, useRef } from "react";
 import { Card, CardContent } from "~/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "~/components/ui/accordion";
+import { Button } from "~/components/ui/button";
 
 export function meta({ }: Route.MetaArgs) {
   return createMeta({
@@ -135,6 +136,8 @@ export default function Home() {
 
         <ServicesSection />
 
+        <FeaturedWork />
+
         <ContactSection />
       </div>
     </div>
@@ -211,6 +214,135 @@ function ServicesSection() {
           >
             View All Services
           </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function FeaturedWork() {
+  const works = [
+    {
+      name: "Oh Banh Mi",
+      website: "ohbanhmi.cafe",
+      image: "/works/ohbanhmi.png",
+      workCompleted: ["Custom site", "Square integration", "Animations", "Online ordering"],
+    },
+    {
+      name: "CWscales",
+      website: "cwscales.com.au",
+      image: "/works/cwscales.jpg",
+      workCompleted: ["Custom site", "WordPress replacement", "Database", "Content management system", "SEO optimisation"],
+    },
+    {
+      name: "Mortgage Fishing",
+      website: "mortgage.fishing",
+      image: "/works/mortgage-fishing.jpg",
+      workCompleted: ["Headless frontend", "WordPress backend", "AI generated content"],
+    },
+  ]
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  const startTimer = () => {
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    // Start new interval
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % works.length);
+    }, 5000);
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  const nextProject = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % works.length);
+    startTimer();
+  };
+
+  const prevProject = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + works.length) % works.length);
+    startTimer();
+  };
+
+  const goToProject = (index: number) => {
+    setCurrentIndex(index);
+    startTimer();
+  };
+
+  return (
+    <section className="h-screen bg-black text-white snap-start flex flex-col items-center overflow-hidden justify-center p-8">
+      <h2 className="text-3xl md:text-5xl font-light mb-8">Featured Work</h2>
+      <div className="w-full sm:w-2/3 mx-auto relative">
+        <div className="relative overflow-hidden">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {works.map((work, index) => (
+              <div
+                key={work.name}
+                className="w-full flex-shrink-0 px-4 text-center"
+              >
+                <div className="w-full overflow-hidden rounded-md mb-4">
+                  <img
+                    src={work.image}
+                    alt={`${work.name} website`}
+                    className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-medium mb-1">{work.name}</h3>
+                <p className="text-gray-400 mb-3">{work.website}</p>
+                <div className="flex flex-wrap gap-2 justify-center w-full">
+                  {work.workCompleted.map((item) => (
+                    <span
+                      className="px-2 py-1 bg-white/10 rounded text-sm"
+                      key={item}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Button
+          onClick={prevProject}
+          className="absolute left-0 bottom-1/4 -translate-y-1/2 bg-white hover:bg-white/70 text-black p-5 rounded-full transition-colors"
+          aria-label="Previous project"
+        >
+          ←
+        </Button>
+        <Button
+          onClick={nextProject}
+          className="absolute right-0 bottom-1/4 -translate-y-1/2 bg-white hover:bg-white/70 text-black p-5 rounded-full transition-colors"
+          aria-label="Next project"
+        >
+          →
+        </Button>
+
+        <div className="flex justify-center gap-2 mt-4">
+          {works.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToProject(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-white' : 'bg-white/30'}`}
+              aria-label={`Go to project ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
