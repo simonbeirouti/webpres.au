@@ -18,11 +18,15 @@ const cleanRoutes = getRouteDisplayName(navRoutes);
 export function Navigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
     const renderNavLink = (route: { path: string; isButton?: boolean }, index: number) => {
         if (route.isButton) {
             return (
                 <Button key={index} variant="default" asChild className="w-full sm:w-auto bg-black hover:bg-black/90">
-                    <Link to={`/${route.path}`}>{route.path.toUpperCase()}</Link>
+                    <Link to={`/${route.path}`} onClick={closeMenu}>{route.path.toUpperCase()}</Link>
                 </Button>
             );
         }
@@ -31,8 +35,9 @@ export function Navigation() {
             <NavLink
                 key={index}
                 to={`/${route.path}`}
+                onClick={closeMenu}
                 className={({ isActive }) =>
-                    `hover:underline hover:underline-offset-8 font-medium ${isActive ? "underline underline-offset-8 font-medium" : ""
+                    `hover:underline hover:underline-offset-8 font-light ${isActive ? "underline underline-offset-8 font-medium" : ""
                     }`
                 }
             >
@@ -42,9 +47,9 @@ export function Navigation() {
     };
 
     return (
-        <Card className="fixed top-4 left-4 right-4 p-0 flex justify-between items-center z-50 bg-white/20 backdrop-blur-md border border-white/30 shadow-lg hover:bg-white/30 hover:shadow-xl transition-all">
+        <Card className="fixed top-4 left-4 right-4 p-0 flex justify-between items-center z-50 bg-white/90 backdrop-blur-md border border-white/30 shadow-lg hover:shadow-xl transition-all">
             <CardContent className="p-4 flex justify-between items-center w-full">
-                <Link to="/" className="text-xl font-semibold">WEBPRES</Link>
+                <Link to="/" className="text-xl font-light" onClick={closeMenu}>WEBPRES</Link>
 
                 <div className="hidden md:flex items-center space-x-8">
                     {cleanRoutes.map((route, index) => renderNavLink(route, index))}
