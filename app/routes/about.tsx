@@ -3,7 +3,7 @@ import { createMeta } from "~/lib/meta";
 import { Fragment } from "react";
 import TextHero from "~/components/shared/text-hero";
 import FeaturedWork from "~/components/about/featured-work";
-import ServicesSection from "~/components/about/services-section";
+import BentoGridArea from "~/components/shared/bento-grid";
 
 export function meta({ }: Route.MetaArgs) {
   return createMeta({
@@ -21,7 +21,7 @@ export default function About() {
         words="Democratizing digital excellence so every business can thrive in tomorrow's world."
         backgroundImage="/content/moon.jpg"
       />
-      <ServicesSection />
+      <BentoGridArea />
       <FeaturedWork />
     </Fragment>
   );
