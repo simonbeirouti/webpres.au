@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router";
 import { Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { navRoutes } from "~/routes";
 import { Card, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
@@ -18,6 +18,17 @@ const cleanRoutes = getRouteDisplayName(navRoutes);
 export function Navigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setIsMenuOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const closeMenu = () => {
         setIsMenuOpen(false);
     };
@@ -25,7 +36,7 @@ export function Navigation() {
     const renderNavLink = (route: { path: string; isButton?: boolean }, index: number) => {
         if (route.isButton) {
             return (
-                <Button key={index} variant="default" asChild className="w-full sm:w-auto bg-black hover:bg-black/90">
+                <Button key={index} variant="default" asChild className="w-full sm:w-auto bg-black hover:bg-black/90 text-center">
                     <Link to={`/${route.path}`} onClick={closeMenu}>{route.path.toUpperCase()}</Link>
                 </Button>
             );
@@ -37,7 +48,7 @@ export function Navigation() {
                 to={`/${route.path}`}
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                    `hover:underline hover:underline-offset-8 font-light ${isActive ? "underline underline-offset-8 font-medium" : ""
+                    `block w-full py-2 text-center hover:underline hover:underline-offset-8 font-light ${isActive ? "underline underline-offset-8 font-medium" : ""
                     }`
                 }
             >
@@ -65,9 +76,9 @@ export function Navigation() {
 
             {isMenuOpen && (
                 <CardContent className="p-4 w-full -mt-6">
-                    <div className="flex flex-col space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
                         {cleanRoutes.map((route, index) => (
-                            <div key={index} className={cn("w-full", route.isButton && "w-full")}>
+                            <div key={index} className={cn("w-full bg-white/50 rounded-md", route.isButton ? "col-span-2" : "")}>
                                 {renderNavLink(route, index)}
                             </div>
                         ))}

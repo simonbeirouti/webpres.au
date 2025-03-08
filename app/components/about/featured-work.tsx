@@ -58,7 +58,7 @@ export default function FeaturedWork() {
         const SingleWork = () => (
             <div className="flex items-center">
                 <span className="text-5xl md:text-7xl font-light px-4 uppercase">{work.name}</span>
-                <div className="w-[200px] h-[100px] md:w-[300px] md:h-[150px] mx-4 rounded-[2rem] overflow-hidden">
+                <div className="w-[200px] h-[100px] md:w-[300px] md:h-[150px] mx-4 rounded-lg overflow-hidden">
                     <img
                         src={work.image}
                         alt={`${work.name} preview`}

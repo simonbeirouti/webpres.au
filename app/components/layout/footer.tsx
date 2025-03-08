@@ -9,7 +9,7 @@ export default function FooterSection() {
     }
 
     return (
-        <section className="bg-black text-white flex items-center justify-center m-4 rounded-xl px-6 py-48">
+        <section className="bg-black text-white flex items-center justify-center m-4 rounded-lg px-6 py-48">
             <div className="text-center">
                 <h2 className="text-4xl md:text-6xl font-light mb-8">Ready to transform your web presence?</h2>
                 <p className="text-xl md:text-2xl mb-12">Let's discuss how WebPres can help you achieve your digital goals.</p>
