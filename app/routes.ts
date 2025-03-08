@@ -1,4 +1,4 @@
-import { type RouteConfig, index, prefix, route } from "@react-router/dev/routes";
+import { type RouteConfig, index, prefix, layout, route } from "@react-router/dev/routes";
 
 export const navRoutes = [
     route("about", "./routes/about.tsx"),
@@ -11,7 +11,9 @@ const apiRoutes = [
 ];
 
 export default [
-    index("routes/home.tsx"),
-    ...navRoutes,
+    layout("./components/layout/main-layout.tsx", [
+        index("routes/home.tsx"),
+        ...navRoutes,
+    ]),
     ...prefix("api", apiRoutes),
 ] satisfies RouteConfig;
