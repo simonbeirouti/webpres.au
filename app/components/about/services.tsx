@@ -26,7 +26,7 @@ export default function ServicesSection() {
     ];
 
     return (
-        <section className="h-screen bg-white snap-start p-8">
+        <section className="bg-white p-8 pt-36 md:pt-48">
             <div className="w-full sm:w-2/3 mx-auto h-full flex flex-col justify-center">
                 <h1 className="text-4xl md:text-6xl font-light mb-8 text-center">Here&apos;s what we do</h1>
                 <div className="space-y-4">
