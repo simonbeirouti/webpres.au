@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { Card, CardContent } from "~/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "~/components/ui/accordion";
 import { Button } from "~/components/ui/button";
+import { useSection } from "~/hooks/useSection";
 
 export function meta({ }: Route.MetaArgs) {
   return createMeta({
@@ -16,9 +17,8 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Home() {
   const [filledIndices, setFilledIndices] = useState<number[]>([]);
-  const [currentSection, setCurrentSection] = useState(0);
   const [currentColors, setCurrentColors] = useState<string[]>([]);
-  const sectionsRef = useRef<HTMLDivElement>(null);
+  const { sectionsRef, scrollToNextSection } = useSection();
 
   const colors = [
     '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4',
@@ -52,37 +52,6 @@ export default function Home() {
     }, 2000);
 
     return () => clearInterval(intervalId);
-  }, []);
-
-  const scrollToNextSection = () => {
-    if (sectionsRef.current) {
-      const nextSection = currentSection + 1;
-      sectionsRef.current.scrollTo({
-        top: nextSection * window.innerHeight,
-        behavior: 'smooth'
-      });
-      setCurrentSection(nextSection);
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = (e: Event) => {
-      if (sectionsRef.current) {
-        const section = Math.round(sectionsRef.current.scrollTop / window.innerHeight);
-        setCurrentSection(section);
-      }
-    };
-
-    const sectionsElement = sectionsRef.current;
-    if (sectionsElement) {
-      sectionsElement.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (sectionsElement) {
-        sectionsElement.removeEventListener('scroll', handleScroll);
-      }
-    };
   }, []);
 
   return (
@@ -303,8 +272,8 @@ function FeaturedWork() {
                   />
                 </div>
                 <h3 className="text-xl font-medium mb-1">{work.name}</h3>
-                <p className="text-gray-400 mb-3">{work.website}</p>
-                <div className="flex flex-wrap gap-2 justify-center w-full">
+                <a href={`https://${work.website}`} className="text-gray-400 mb-3">{work.website}</a>
+                <div className="flex flex-wrap gap-2 justify-center w-full mt-4">
                   {work.workCompleted.map((item) => (
                     <span
                       className="px-2 py-1 bg-white/10 rounded text-sm"
