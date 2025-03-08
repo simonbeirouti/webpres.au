@@ -9,6 +9,19 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* Add horizontal scroll animation */
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+  /* Make animation smoother */
+  will-change: transform;
+}
+
 html,
 body {
   @apply bg-white dark:bg-gray-950;
