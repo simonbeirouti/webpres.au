@@ -1,3 +1,12 @@
+ToDos
+- Update README
+- Create pages
+    - About
+    - Services
+    - Contact
+- Optimise code placements
+- Scrape data for businesses
+
 # Welcome to React Router!
 
 A modern, production-ready template for building full-stack React applications using React Router.
