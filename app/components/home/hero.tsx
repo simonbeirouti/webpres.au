@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "~/components/ui/card";
-import { useSection } from "~/hooks/useSection";
+import { Link } from "react-router";
 
 export default function Hero() {
-    const { scrollToNextSection } = useSection()
     const [filledIndices, setFilledIndices] = useState<number[]>([]);
     const [currentColors, setCurrentColors] = useState<string[]>([]);
 
@@ -42,8 +41,8 @@ export default function Hero() {
     }, []);
 
     return (
-        <div className="relative h-screen snap-start pt-[64px]">
-            <div className="absolute inset-0 overflow-hidden select-none" style={{ userSelect: 'none' }}>
+        <div className="relative h-screen">
+            <div className="fixed inset-0 overflow-hidden select-none" style={{ userSelect: 'none' }}>
                 <div className="h-full flex flex-col justify-between">
                     {Array.from({ length: 8 }).map((_, i) => (
                         <div
@@ -64,25 +63,28 @@ export default function Hero() {
             </div>
 
             <div className="absolute bottom-20 left-0 right-0 z-10 px-8">
-                <Card
-                    onClick={scrollToNextSection}
-                    className="mx-auto max-w-xl cursor-pointer bg-white/20 backdrop-blur-md border border-white/30 shadow-lg hover:bg-white/30 hover:shadow-xl transition-all"
-                >
-                    <CardContent className="p-8 text-center">
-                        <div className="text-2xl md:text-3xl mb-8">
-                            See how WebPres,
-                            <br />
-                            can grow your brand.
-                        </div>
+                <Link to="/about" className="block">
+                    <Card
+                        className="mx-auto max-w-xl bg-white/20 backdrop-blur-md border border-white/30 shadow-lg hover:bg-white/30 hover:shadow-xl transition-all cursor-pointer"
+                    >
+                        <CardContent className="p-8 text-center flex flex-row justify-between items-center">
+                            <div className="text-2xl md:text-3xl">
+                                See how WebPres,
+                                <br />
+                                can grow your brand.
+                            </div>
 
-                        <div
-                            className="animate-bounce flex items-center justify-center w-12 h-12 rounded-full bg-black text-white mx-auto"
-                            aria-label="Scroll to next section"
-                        >
-                            ↓
-                        </div>
-                    </CardContent>
-                </Card>
+                            <div className="flex justify-end">
+                                <div
+                                    className="flex items-center justify-center w-12 h-12 rounded-full bg-black text-white hover:bg-gray-800 transition-colors"
+                                    aria-hidden="true"
+                                >
+                                    <span className="text-xl">→</span>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </Link>
             </div>
         </div>
     );
