@@ -1,5 +1,6 @@
 import { cn } from "~/lib/utils";
 import React from "react";
+import { Link } from "react-router";
 
 export const BentoGrid = ({
     className,
@@ -22,19 +23,22 @@ export const BentoGrid = ({
 
 export const BentoGridItem = ({
     className,
+    id,
     title,
     description,
     header,
     icon,
 }: {
     className?: string;
+    id: string;
     title?: string | React.ReactNode;
     description?: string | React.ReactNode;
     header?: React.ReactNode;
     icon?: React.ReactNode;
 }) => {
     return (
-        <div
+        <Link
+            to={`/services#${id}`}
             className={cn(
                 "row-span-1 rounded-xl group/bento transition duration-200 shadow-input p-4 text-black border border-black/20 justify-between flex flex-col space-y-4",
                 className
@@ -50,6 +54,6 @@ export const BentoGridItem = ({
                     {description}
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };

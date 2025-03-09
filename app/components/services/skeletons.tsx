@@ -163,7 +163,7 @@ export const Web3Services = () => {
                 <img
                     src="/content/old-apes.jpg"
                     alt="avatar"
-                    className="rounded-lg h-30 w-30"
+                    className="rounded-lg h-20 w-20"
                 />
                 <p className="border border-red-500 bg-red-100 dark:bg-red-900/20 text-red-600 text-xs rounded-full px-2 py-0.5 mt-4">
                     Normal
@@ -173,7 +173,7 @@ export const Web3Services = () => {
                 <img
                     src="/content/modern-apes.jpg"
                     alt="avatar"
-                    className="rounded-lg h-30 w-30"
+                    className="rounded-lg h-20 w-20"
                 />
                 <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
                     Rare
@@ -186,7 +186,7 @@ export const Web3Services = () => {
                 <img
                     src="/content/future-apes.jpg"
                     alt="avatar"
-                    className="rounded-lg h-30 w-30"
+                    className="rounded-lg h-20 w-20"
                 />
                 <p className="border border-orange-500 bg-orange-100 dark:bg-orange-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
                     Exotic

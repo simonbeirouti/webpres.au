@@ -6,6 +6,7 @@ import { Web3Services, AIDevelopment, WebsiteDevelopment, DesignServices } from 
 const items = [
     {
         title: "Modern Website Development",
+        id: "website-development",
         description: "Creating responsive, user-focused websites that deliver exceptional experiences",
         header: <WebsiteDevelopment />,
         className: "md:col-span-1",
@@ -13,6 +14,7 @@ const items = [
     },
     {
         title: "AI Development and Services",
+        id: "ai-services",
         description: "Harness the power of artificial intelligence to elevate your digital presence",
         header: <AIDevelopment />,
         className: "md:col-span-2",
@@ -20,6 +22,7 @@ const items = [
     },
     {
         title: "Web3 Services",
+        id: "web3-services",
         description: "Step into the future of the internet with our Web3 solutions",
         header: <Web3Services />,
         className: "md:col-span-2",
@@ -27,6 +30,7 @@ const items = [
     },
     {
         title: "Design and Branding Services",
+        id: "design-services",
         description: "Creating cohesive brand experiences that resonate across all digital touchpoints",
         header: <DesignServices />,
         className: "md:col-span-1",
@@ -36,10 +40,11 @@ const items = [
 
 export default function BentoGridArea() {
     return (
-        <BentoGrid className="max-w-7xl mx-auto md:auto-rows-[20rem] px-4 pt-4 xl:pt-12 pb-24 md:pb-36">
+        <BentoGrid className="max-w-7xl mx-auto md:auto-rows-[20rem] px-4">
             {items.map((item, i) => (
                 <BentoGridItem
                     key={i}
+                    id={item.id}
                     title={item.title}
                     description={item.description}
                     header={item.header}
