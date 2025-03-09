@@ -93,8 +93,8 @@ export default function FeaturedWork() {
     };
 
     return (
-        <section className="bg-white text-black/80 relative overflow-hidden h-screen">
-            <div className="absolute inset-0 flex flex-col justify-center gap-16">
+        <section className="bg-white text-black/80 relative overflow-hidden min-h-[800px] pb-24">
+            <div className="flex flex-col justify-center gap-16">
                 {works.map((work, index) => (
                     <WorkRow key={work.name} work={work} reverse={index % 2 === 0} />
                 ))}

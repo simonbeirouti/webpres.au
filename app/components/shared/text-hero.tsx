@@ -28,7 +28,7 @@ export default function TextHero({
 }: TextHeroProps) {
     return (
         <motion.section
-            className="relative flex items-center justify-center text-white p-8 py-48 md:py-64 overflow-hidden"
+            className="h-[50vh] relative flex items-center justify-center text-white p-8 py-48 md:py-64 overflow-hidden"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
