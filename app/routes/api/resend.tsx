@@ -36,17 +36,28 @@ export const action = async ({ request }: Route.ActionArgs) => {
     if (action === "contact") {
         const name = String(formData.get("name"));
         const email = String(formData.get("email"));
+        const company = String(formData.get("company"));
+        const phone = String(formData.get("phone"));
         const message = String(formData.get("message"));
+        const projectType = String(formData.get("projectType"));
 
         try {
-            await resend.emails.send({
-                from: 'website@cmpnd.cc',
+            const data = await resend.emails.send({
+                from: 'webpres@cmpnd.cc',
                 to: 'hello@simonbeirouti.com',
-                cc: 'vasugaur2@gmail.com',
-                subject: `New Contact Form Submission from ${name}`,
-                react: <Email name={name} email={email} message={message} />,
-                replyTo: email,
+                subject: `New enquiry from ${name}`,
+                react: <Email 
+                  name={name} 
+                  email={email} 
+                  company={company} 
+                  phone={phone} 
+                  message={message} 
+                  projectType={projectType} 
+                />,
+                replyTo: `${name} <${email}>`,
             });
+
+            console.log(data);
 
             return { success: true };
         } catch (error) {

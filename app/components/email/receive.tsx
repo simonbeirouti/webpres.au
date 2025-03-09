@@ -7,18 +7,25 @@ import {
     Html,
     Preview,
     Text,
+    Section,
   } from '@react-email/components';
   
   interface EmailProps {
     name: string;
     email: string;
     message: string;
+    company: string;
+    phone: string;
+    projectType: string;
   }
   
   export const Email = ({
     name,
     email,
+    company,
+    phone,
     message,
+    projectType,
   }: EmailProps) => (
     <Html>
       <Head />
@@ -26,9 +33,29 @@ import {
         <Preview>New Form Submission from {name}</Preview>
         <Container style={container}>
           <Heading style={heading}>New Form Submission from {name}</Heading>
-          <Text style={paragraph}>
-            {message}
-          </Text>
+          
+          <Section style={section}>
+            <Text style={labelStyle}>Contact Information:</Text>
+            <Text style={infoText}>Name: <span style={valueStyle}>{name}</span></Text>
+            <Text style={infoText}>Email: <span style={valueStyle}>{email}</span></Text>
+            <Text style={infoText}>Company: <span style={valueStyle}>{company || 'Not provided'}</span></Text>
+            <Text style={infoText}>Phone: <span style={valueStyle}>{phone || 'Not provided'}</span></Text>
+          </Section>
+
+          <Hr style={hr} />
+          
+          <Section style={section}>
+            <Text style={labelStyle}>Project Details:</Text>
+            <Text style={infoText}>Project Type: <span style={valueStyle}>{projectType || 'Not specified'}</span></Text>
+          </Section>
+          
+          <Hr style={hr} />
+          
+          <Section style={section}>
+            <Text style={labelStyle}>Message:</Text>
+            <Text style={paragraph}>{message}</Text>
+          </Section>
+          
           <Hr style={hr} />
         </Container>
       </Body>
@@ -67,5 +94,27 @@ import {
   
   const hr = {
     borderColor: '#dfe1e4',
-    margin: '42px 0 26px',
+    margin: '26px 0',
+  };
+  
+  const section = {
+    margin: '0 0 15px',
+  };
+  
+  const labelStyle = {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#484848',
+    margin: '0 0 8px',
+  };
+  
+  const infoText = {
+    margin: '0 0 5px',
+    fontSize: '14px',
+    lineHeight: '1.4',
+    color: '#3c4149',
+  };
+  
+  const valueStyle = {
+    fontWeight: '500',
   };

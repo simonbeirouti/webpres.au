@@ -15,7 +15,7 @@ export default function FooterSection() {
                 <p className="text-xl md:text-2xl mb-12">Let's discuss how WebPres can help you achieve your digital goals.</p>
                 <Link
                     to="/contact"
-                    className="uppercase inline-block bg-white text-black px-8 py-4 text-xl font-bold hover:bg-purple-100 transition-colors rounded-lg"
+                    className="uppercase inline-block bg-white text-black px-8 py-4 text-xl font-normal hover:bg-purple-100 transition-colors rounded-lg"
                 >
                     Contact
                 </Link>
