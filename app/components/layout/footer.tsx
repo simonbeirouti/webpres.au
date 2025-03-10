@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 export default function FooterSection() {
     const location = useLocation();
 
-    if (location.pathname === "/" || location.pathname === "/contact") {
+    if (location.pathname === "/" || location.pathname.startsWith("/contact")) {
         return null;
     }
 
