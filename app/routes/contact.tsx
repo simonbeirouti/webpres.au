@@ -21,9 +21,7 @@ export default function Contact() {
         backgroundImage="/content/contact.jpg"
       />
       <section className="max-w-7xl mx-auto p-4">
-        <div className="flex flex-col items-center justify-start w-full">
-          <ContactForm />
-        </div>
+        <ContactForm />
       </section>
     </Fragment>
   )
