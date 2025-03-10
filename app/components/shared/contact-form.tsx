@@ -1,10 +1,9 @@
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { Textarea } from "~/components/ui/textarea";
 import { useFetcher } from "react-router";
-import { MoveRight } from "lucide-react";
+import { X, Check } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { isValidEmail } from "~/lib/functions";
 
@@ -17,15 +16,16 @@ export default function ContactForm({ className, onSubmitSuccess }: ContactFormP
     const fetcher = useFetcher();
     const errors = fetcher.data?.errors;
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formState, setFormState] = useState({
         name: '',
         email: '',
         company: '',
         message: '',
         projectTypes: {
-            'website': false,
-            'ai': false,
-            'web3': false,
+            'websites': false,
+            'AI': false,
+            'blockchain': false,
             'design': false,
             'other': false,
         }
@@ -63,6 +63,13 @@ export default function ContactForm({ className, onSubmitSuccess }: ContactFormP
         });
     };
 
+    const handleSubmit = (e: React.FormEvent) => {
+        setFormSubmitted(true);
+        if (isFormValid) {
+            setIsSubmitting(true);
+        }
+    };
+
     useEffect(() => {
         if (fetcher.data?.success) {
             toast.success("Message sent!", {
@@ -74,9 +81,9 @@ export default function ContactForm({ className, onSubmitSuccess }: ContactFormP
                 company: '',
                 message: '',
                 projectTypes: {
-                    'website': false,
-                    'ai': false,
-                    'web3': false,
+                    'websites': false,
+                    'AI': false,
+                    'blockchain': false,
                     'design': false,
                     'other': false,
                 }
@@ -91,6 +98,12 @@ export default function ContactForm({ className, onSubmitSuccess }: ContactFormP
             }
         }
     }, [fetcher.data, onSubmitSuccess]);
+
+    useEffect(() => {
+        if (fetcher.state === "idle" && isSubmitting) {
+            setIsSubmitting(false);
+        }
+    }, [fetcher.state, isSubmitting]);
 
     const container = {
         hidden: { opacity: 0 },
@@ -170,14 +183,14 @@ export default function ContactForm({ className, onSubmitSuccess }: ContactFormP
 
                                     <div className="text-2xl md:text-4xl lg:text-6xl font-extralight mb-4 leading-relaxed">
                                         <div className="flex flex-wrap items-center gap-x-2">
-                                            <span>I am interested in</span>
+                                            <span className="mr-1">I am interested in</span>
                                             {Object.entries(formState.projectTypes).map(([type, isSelected]) => (
                                                 <button
                                                     key={type}
                                                     type="button"
                                                     onClick={() => handleCheckboxChange(type)}
                                                     className={`
-                                                        px-3 py-1 text-sm sm:text-base md:text-lg rounded-full border transition-all whitespace-nowrap
+                                                        px-3 sm:px-6 py-1 sm:py-2 text-sm sm:text-base md:text-lg rounded-full border transition-all whitespace-nowrap
                                                         ${isSelected
                                                             ? 'bg-black text-white border-black'
                                                             : formSubmitted && !isProjectTypeSelected
@@ -202,45 +215,47 @@ export default function ContactForm({ className, onSubmitSuccess }: ContactFormP
                                             <span>.</span>
                                         </div>
                                     </div>
-
-                                    {formSubmitted && !isFormValid && (
-                                        <div className="space-y-2 text-red-500 text-sm">
-                                            {!isNameValid &&
-                                                <div>• Please enter your name (at least 2 characters)</div>
-                                            }
-
-                                            {!isCompanyValid &&
-                                                <div>• Please enter your company name (at least 2 characters)</div>
-                                            }
-
-                                            {!isEmailValid &&
-                                                <div>• Please enter a valid email address</div>
-                                            }
-
-                                            {!isProjectTypeSelected &&
-                                                <div>• Please select at least one project type</div>
-                                            }
-
-                                            {!isMessageValid &&
-                                                <div>• Please provide project details (at least 10 characters)</div>
-                                            }
-                                        </div>
-                                    )}
                                 </div>
                             </motion.div>
+
+                            {formSubmitted && !isFormValid && (
+                                <motion.div 
+                                    variants={item}
+                                    className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-md mb-4"
+                                >
+                                    <div className="font-medium mb-1">Please complete the following:</div>
+                                    <ul className="list-disc pl-5 space-y-1 text-sm">
+                                        {!isNameValid && <li>Your name</li>}
+                                        {!isCompanyValid && <li>Your company</li>}
+                                        {!isEmailValid && <li>A valid email address</li>}
+                                        {!isProjectTypeSelected && <li>Select at least one project type</li>}
+                                        {!isMessageValid && <li>Project details (at least 10 characters)</li>}
+                                    </ul>
+                                </motion.div>
+                            )}
 
                             <motion.div variants={item}>
                                 <Button
                                     type="submit"
+                                    onClick={handleSubmit}
                                     className={`
-                                        w-full text-white py-4 px-6 rounded-md
+                                        w-full py-10 px-8 rounded-md
                                         transition-all duration-300 ease-in-out
-                                        flex items-center justify-center
-                                        bg-black hover:bg-gray-800 cursor-pointer
+                                        flex items-center justify-between gap-6 text-lg
+                                        bg-transparent border-2 border-black/50 text-black hover:bg-black hover:text-white
+                                        cursor-pointer font-medium
                                     `}
                                 >
-                                    <span className="mr-2">Send Message</span>
-                                    <MoveRight className="w-4 h-4" />
+                                    <span className="mx-2">Send Message</span>
+                                    {isFormValid ? (
+                                        <div className="w-12 h-12 rounded-full border-2 border-green-500 bg-green-50 flex items-center justify-center">
+                                            <Check className="w-7 h-7 text-green-500" />
+                                        </div>
+                                    ) : (
+                                        <div className="w-12 h-12 rounded-full border-2 border-red-400 bg-red-50 flex items-center justify-center">
+                                            <X className="w-7 h-7 text-red-400" />
+                                        </div>
+                                    )}
                                 </Button>
                             </motion.div>
 
