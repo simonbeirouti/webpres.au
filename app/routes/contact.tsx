@@ -20,9 +20,9 @@ export default function Contact() {
         words="Let's build something amazing together."
         backgroundImage="/content/contact.jpg"
       />
-      <div className="flex flex-col items-center justify-start">
+      <section className="max-w-7xl mx-auto p-4">
         <ContactForm />
-      </div>
+      </section>
     </Fragment>
   )
 }

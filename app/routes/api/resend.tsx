@@ -25,7 +25,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
             return { success: true };
         } catch (error) {
             console.error("Subscribe error:", error);
-            return { 
+            return {
                 errors: {
                     submit: "Failed to subscribe. Please try again later."
                 }
@@ -37,7 +37,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
         const name = String(formData.get("name"));
         const email = String(formData.get("email"));
         const company = String(formData.get("company"));
-        const phone = String(formData.get("phone"));
         const message = String(formData.get("message"));
         const projectType = String(formData.get("projectType"));
 
@@ -46,13 +45,12 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 from: 'webpres@cmpnd.cc',
                 to: 'hello@simonbeirouti.com',
                 subject: `New enquiry from ${name}`,
-                react: <Email 
-                  name={name} 
-                  email={email} 
-                  company={company} 
-                  phone={phone} 
-                  message={message} 
-                  projectType={projectType} 
+                react: <Email
+                    name={name}
+                    email={email}
+                    company={company}
+                    message={message}
+                    projectType={projectType}
                 />,
                 replyTo: `${name} <${email}>`,
             });
@@ -70,7 +68,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
         }
     }
 
-    return { 
+    return {
         errors: {
             submit: "Invalid action"
         }
