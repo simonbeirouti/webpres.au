@@ -3,6 +3,7 @@ import { type RouteConfig, index, prefix, layout, route } from "@react-router/de
 export const navRoutes = [
     route("about", "./routes/about.tsx"),
     route("services", "./routes/services.tsx"),
+    route("pricing", "./routes/pricing.tsx"),
     route("contact", "./routes/contact.tsx"),
 ];
 
