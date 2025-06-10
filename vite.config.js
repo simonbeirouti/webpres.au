@@ -57,16 +57,5 @@ export default defineConfig({
   ],
   build: {
     outDir: "build",
-    // rollupOptions: {
-    //   output: {
-    //     assetFileNames: (assetInfo) => {
-    //       // Keep sitemap.xml and robots.txt at the root level
-    //       if (assetInfo.name === 'sitemap.xml' || assetInfo.name === 'robots.txt') {
-    //         return '[name].[ext]';
-    //       }
-    //       return 'assets/[name]-[hash].[ext]';
-    //     },
-    //   },
-    // },
   },
 });
