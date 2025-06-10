@@ -18,10 +18,6 @@ const Footer = () => {
             From new ideas to existing businesses, I&apos;m always open to creative
             collaborations. Feel free to reach out anytime.
           </p>
-
-          <Link to="/contact" className="btn">
-            Get in Touch
-          </Link>
         </div>
 
         <div className="footer-nav">

@@ -139,21 +139,14 @@ const Menu = () => {
       if (isMenuOpen) return;
 
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY.current) {
-        gsap.to(".menu-bar", {
-          y: -200,
-          duration: 1,
-          ease: "power2.out",
-        });
-      } else {
-        gsap.to(".menu-bar", {
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-        });
-      }
-
+      
+      // Modified: Always keep the menu visible regardless of scroll direction
+      gsap.to(".menu-bar", {
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
+      
       lastScrollY.current = currentScrollY;
     };
 

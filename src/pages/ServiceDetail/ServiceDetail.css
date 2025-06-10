@@ -10,21 +10,6 @@
   text-align: center;
 }
 
-.service-banner-img {
-  position: relative;
-  width: 100svw;
-  height: 100svh;
-  overflow: hidden;
-}
-
-.service-banner-img-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .service-details {
   width: 80%;
   padding: 6em 1em;
@@ -41,33 +26,6 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-}
-
-.next-service {
-  width: 100vw;
-  height: 100svh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5em;
-  text-align: center;
-}
-
-.next-service-img {
-  position: relative;
-  width: 35%;
-  height: 400px;
-  overflow: hidden;
-}
-
-.next-service-img-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .loading {
@@ -133,6 +91,22 @@
   height: 100%;
 }
 
+.service-banner-img {
+  position: relative;
+  width: 100svw;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.service-banner-img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
 @media (min-width: 768px) {
   .pricing-cards-container {
     grid-template-columns: repeat(2, 1fr);
@@ -160,12 +134,13 @@
     padding: 6em 1.25em;
     gap: 3em;
   }
-
-  .next-service {
-    padding: 1.25em;
+  
+  .next-project {
+    width: 90%;
+    margin: 0 auto;
   }
-
-  .next-service-img {
-    width: 75%;
+  
+  .next-project-img {
+    width: 100%;
   }
 }

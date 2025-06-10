@@ -19,6 +19,7 @@
 
 .popular-badge {
   position: absolute;
+  font-family: "Messina Sans";
   top: 0;
   right: 0;
   left: 0;
@@ -39,6 +40,12 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .pricing-card.popular .card-title {
+    padding-top: 1em;
+  }
 }
 
 .card-title.enterprise {
@@ -94,6 +101,7 @@
 
 .feature-item {
   display: flex;
+  font-family: "Messina Sans";
   align-items: center;
   gap: 0.5rem;
   font-size: 0.95rem;

@@ -72,9 +72,9 @@ const ServiceDetail = () => {
           </AnimatedCopy>
         </section>
 
-        <section className="about-hero">
-          <div className="about-hero-img">
-            <img src={service.image} alt={service.title} />
+        <section className="service-banner-img">
+          <div className="service-banner-img-wrapper">
+            <ParallaxImage src={service.image} alt={service.title} />
           </div>
         </section>
 
@@ -136,7 +136,7 @@ const ServiceDetail = () => {
 
           <div className="next-project-img">
             <div className="next-project-img-wrapper">
-              <ParallaxImage src={nextService.image || "/work/work-2.jpg"} alt={nextService.title} />
+              <img src={nextService.image || "/work/work-2.jpg"} alt={nextService.title} />
             </div>
           </div>
 
